@@ -8,6 +8,7 @@
 import Foundation
 
 protocol PokemonListModelProtocol {
+    var pokemons: [PokemonDetail] { get set }
     func getPokemons(completion: @escaping (_ response: [PokemonDetail]?, _ error: Error?) -> Void)
 }
 
@@ -15,8 +16,11 @@ class PokemonListModel: PokemonListModelProtocol {
     
     private var pokemonClient: PokemonClientProtocol = PokemonClient()
     
+    var pokemons: [PokemonDetail] = []
+    
     func getPokemons(completion: @escaping (_ response: [PokemonDetail]?, _ error: Error?) -> Void) {
         var fetchedPokemons: [PokemonDetail] = []
+        
         self.pokemonClient.getPokemons {(response, error) in
             guard error == nil,
                   let response = response else {
@@ -25,7 +29,10 @@ class PokemonListModel: PokemonListModelProtocol {
                 return
             }
             
+            let dispatchGroup = DispatchGroup()
+            
             for pokemon in response {
+                dispatchGroup.enter()
                 self.pokemonClient.getPokemon(name: pokemon.name) { (response, error) in
                     guard error == nil else {
                         completion(nil, error)
@@ -38,10 +45,16 @@ class PokemonListModel: PokemonListModelProtocol {
                         completion(nil, error)
                         return
                     }
-                        fetchedPokemons.append(response)
+                    fetchedPokemons.append(response)
+                    dispatchGroup.leave()
                 }
             }
-           completion(fetchedPokemons, nil)
+            
+            
+            dispatchGroup.notify(queue: DispatchQueue.main) {
+                self.pokemons = fetchedPokemons
+                completion(fetchedPokemons, nil)
+            }
         }
     }
 }
