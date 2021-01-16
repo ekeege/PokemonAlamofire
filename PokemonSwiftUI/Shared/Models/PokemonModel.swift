@@ -14,6 +14,8 @@ struct Pokemon: Codable {
 struct PokemonDetail: Codable, Identifiable {
     var id: Int
     var name: String
+    let weight: Int
+    let height: Int
     var sprites: Sprite
     let types: [TypeElement]
 }
@@ -28,19 +30,11 @@ struct Type: Codable {
 
 struct Sprite: Codable {
     let frontDefault: String
-    let other: SpriteOther
+    let backDefault: String
     
     enum CodingKeys: String, CodingKey {
-        case other
         case frontDefault = "front_default"
-    }
-}
-
-struct SpriteOther: Codable {
-    let dreamWorld: DreamWorld
-    
-    enum CodingKeys: String, CodingKey {
-        case dreamWorld = "dream_world"
+        case backDefault = "back_default"
     }
 }
 
@@ -54,8 +48,11 @@ struct DreamWorld: Codable {
 
 //MARK: - Mock
 extension PokemonDetail {
-    static let testData = PokemonDetail(id: 0, name: "Unknown",
+    static let testData = PokemonDetail(id: 0,
+                                        name: "Unknown",
+                                        weight: 0,
+                                        height: 0,
                                         sprites: Sprite(frontDefault: "Unknown",
-                                                       other: SpriteOther(dreamWorld: DreamWorld(frontDefault: "Unknown"))),
+                                                       backDefault: "Unknown"),
                                         types: [TypeElement(type: Type(name: "Unknown"))])
 }

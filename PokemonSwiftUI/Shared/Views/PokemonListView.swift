@@ -10,6 +10,7 @@ import SwiftUI
 struct PokemonListView: View {
     
     @StateObject var pokemonListVM = PokemonListViewModel()
+    @StateObject var searchBar = UIKitSearchBar()
     
     @ViewBuilder
     var progressView: some View {
@@ -19,14 +20,33 @@ struct PokemonListView: View {
     }
     
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(pokemonListVM.pokemons, id: \.name) { pokemon in
+        List {
+            ForEach(pokemonListVM.filteredPokemons) { pokemon in
+                NavigationLink(destination: PokemonListDetailView(pokemon: pokemon)) {
                     PokemonListRowView(pokemon: pokemon)
                 }
             }
-            .overlay(progressView)
-            .navigationTitle("Pokemons")
+        }
+        .onChange(of: searchBar.text, perform: { value in
+            pokemonListVM.searchText = searchBar.text
+        })
+        .overlay(progressView)
+        .add(searchBar)
+        .navigationTitle(pokemonListVM.navigationTitle)
+        .toolbar  {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                
+                Menu {
+                    Picker("", selection: $pokemonListVM.selectedFilter) {
+                        ForEach(PokemonType.allCases, id: \.self) { type in
+                            Text(type.rawValue).tag(type)
+                        }
+                    }
+                } label: {
+                    Label(pokemonListVM.labelName, systemImage: pokemonListVM.labelImage)
+                        .font(.title2)
+                }
+            }
         }
     }
 }
