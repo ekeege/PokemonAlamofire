@@ -21,7 +21,8 @@ struct ContentView: View {
             AppSideNavigation()
         }
         #else
-        AppSidebarNavigation()
+        //For macOS (Not Implemented Yet)
+        AppSideNavigation()
         #endif
     }
 }

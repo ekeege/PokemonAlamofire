@@ -30,21 +30,7 @@ struct PokemonListDetailView: View {
     var body: some View {
         List {
             Section(header: Text("Sprites")) {
-                HStack {
-                    Spacer()
-                    WebImage(url: frontImageURL)
-                        .indicator(.activity)
-                        .scaledToFit()
-                        .frame(width: 75, height: 75)
-                    
-                    WebImage(url: backImageURL)
-                        .indicator(.activity)
-                        .scaledToFit()
-                        .frame(width: 75, height: 75)
-                    Spacer()
-                    
-                }
-                
+                sprites
             }
             Section(header: Text("Info")) {
                 infoRow(info: "Height", detail: "\(pokemon.height)")
@@ -53,6 +39,23 @@ struct PokemonListDetailView: View {
         }
         .listStyle(GroupedListStyle())
         .navigationTitle(pokemon.name)
+    }
+    
+    var sprites: some View {
+        HStack {
+            Spacer()
+            WebImage(url: frontImageURL)
+                .indicator(.activity)
+                .scaledToFit()
+                .frame(width: 75, height: 75)
+            
+            WebImage(url: backImageURL)
+                .indicator(.activity)
+                .scaledToFit()
+                .frame(width: 75, height: 75)
+            Spacer()
+            
+        }
     }
     
     func infoRow(info: String, detail: String) -> some View {
