@@ -44,6 +44,8 @@ struct PokemonListRowView: View {
                     ForEach(0..<pokemon.types.count, id: \.self) { i in
                         Text(pokemon.types[i].type.name)
                             .foregroundColor(.secondary)
+                            .padding(5)
+                            .background(.ultraThickMaterial, in: RoundedRectangle(cornerRadius: 10))
                     }
                 }
             }
