@@ -21,7 +21,7 @@ struct AppTabNavigation: View {
             }
             .tag(Tab.pokemons)
             NavigationView {
-                Text("Favorites")
+                Text(TextConstants .favorites)
             }
             .tabItem {
                 Label(TextConstants.favorites, systemImage: ImageConstants.favoriteImageName)

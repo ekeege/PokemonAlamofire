@@ -16,7 +16,7 @@ struct AppSideNavigation: View {
             }
             .tag(NavigationItem.pokemons)
             
-            NavigationLink(destination: Text("Favorites")) {
+            NavigationLink(destination: Text(TextConstants.favorites)) {
                 Label(TextConstants.favorites, systemImage: ImageConstants.favoriteImageName)
             }
             .tag(NavigationItem.favorites)

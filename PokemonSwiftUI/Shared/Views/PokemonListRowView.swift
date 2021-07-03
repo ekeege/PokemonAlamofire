@@ -10,17 +10,9 @@ import SDWebImageSwiftUI
 
 struct PokemonListRowView: View {
     
-    var metrics: Metrics {
-        return Metrics(textPadding: 8,
-                       thumbnailSize: 76,
-                       rowPadding: 0,
-                       cornerRadius: 16
-        )
-    }
-    
     let pokemon: PokemonDetail
     
-    var imageURL: URL {
+    private var imageURL: URL {
         guard let url = URL(string: pokemon.sprites.frontDefault) else {
             return URL(string: "Not implemented yet")!
         }
@@ -61,6 +53,16 @@ struct PokemonListRowView: View {
         var thumbnailSize: CGFloat
         var rowPadding: CGFloat
         var cornerRadius: CGFloat
+    }
+}
+
+private extension PokemonListRowView {
+    var metrics: Metrics {
+        return Metrics(textPadding: 8,
+                       thumbnailSize: 76,
+                       rowPadding: 0,
+                       cornerRadius: 16
+        )
     }
 }
 

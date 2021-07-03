@@ -10,7 +10,6 @@ import SwiftUI
 struct PokemonListView: View {
     
     @StateObject var pokemonListVM = PokemonListViewModel()
-    @StateObject var searchBar = UIKitSearchBar()
     
     @ViewBuilder
     var progressView: some View {
@@ -27,11 +26,8 @@ struct PokemonListView: View {
                 }
             }
         }
-        .onChange(of: searchBar.text, perform: { value in
-            pokemonListVM.searchText = searchBar.text
-        })
+        .searchable(text: $pokemonListVM.searchText)
         .overlay(progressView)
-        .add(searchBar)
         .navigationTitle(pokemonListVM.navigationTitle)
         .toolbar  {
             ToolbarItem(placement: .navigationBarTrailing) {

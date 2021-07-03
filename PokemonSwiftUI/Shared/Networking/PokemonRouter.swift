@@ -41,6 +41,7 @@ enum PokemonRouter: URLRequestConvertible {
     }
     
     // MARK: - URLRequest
+
     public func asURLRequest() throws -> URLRequest {
         let url = try PokemonRouter.baseURLPath.asURL()
         var request = URLRequest(url: url.appendingPathComponent(path))
@@ -49,5 +50,4 @@ enum PokemonRouter: URLRequestConvertible {
         
         return try URLEncoding.default.encode(request, with: parameters)
     }
-    
 }
