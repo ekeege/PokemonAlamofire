@@ -21,10 +21,10 @@ struct PokemonDetail: Codable, Identifiable {
 }
 
 struct TypeElement: Codable {
-    let type: Type
+    let type: `Type`
 }
 
-struct Type: Codable {
+struct `Type`: Codable {
     let name: String
 }
 

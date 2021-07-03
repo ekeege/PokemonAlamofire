@@ -24,8 +24,23 @@ struct PokemonListView: View {
                 NavigationLink(destination: PokemonListDetailView(pokemon: pokemon)) {
                     PokemonListRowView(pokemon: pokemon)
                 }
+                .listRowSeparatorTint(pokemonListVM.listSeperatorTintColor(for: pokemon))
+                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                    Button("Delete", role: .destructive) {
+                        pokemonListVM.removePokemon(with: pokemon.id)
+                    }
+
+                    Button("Favorite") {
+                        // TODO: - Add to favorites
+                    }
+                    .tint(.cyan)
+                }
             }
         }
+        .refreshable {
+            pokemonListVM.getPokemons()
+        }
+        .listStyle(.grouped)
         .searchable(text: $pokemonListVM.searchText) {
             ForEach(pokemonListVM.suggestions, id: \.self) { suggestion in
                 Text(suggestion)
