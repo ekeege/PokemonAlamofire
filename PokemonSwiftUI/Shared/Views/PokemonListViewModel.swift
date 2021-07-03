@@ -27,16 +27,20 @@ final class PokemonListViewModel: ObservableObject, PokemonListViewModelProtocol
     @Published var searchText: String = ""
     
     private var model: PokemonListModelProtocol
+
+    @Published var suggestions: [String] = []
     
     init(model: PokemonListModelProtocol = PokemonListModel()) {
         self.model = model
-        model.getPokemons { (response, error) in
-            guard error == nil,
+        model.getPokemons { [weak self] (response, error) in
+            guard let self = self,
+                  error == nil,
                   let response = response else {
                 print("Error getPokemons: \(error!)")
                 return
             }
             self.pokemons = response
+            self.suggestions = Array(self.pokemons.prefix(Int.random(in: 0..<10))).map { $0.name }
         }
     }
     

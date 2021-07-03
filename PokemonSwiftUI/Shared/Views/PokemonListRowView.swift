@@ -18,6 +18,14 @@ struct PokemonListRowView: View {
         }
         return url
     }
+
+    private var metrics: Metrics {
+        return Metrics(textPadding: 8,
+                       thumbnailSize: 76,
+                       rowPadding: 0,
+                       cornerRadius: 16
+        )
+    }
     
     var body: some View {
         HStack {
@@ -47,22 +55,15 @@ struct PokemonListRowView: View {
         .font(.subheadline)
         .padding(.vertical, metrics.rowPadding)
     }
-    
+}
+
+private extension PokemonListRowView {
+
     struct Metrics {
         var textPadding: CGFloat
         var thumbnailSize: CGFloat
         var rowPadding: CGFloat
         var cornerRadius: CGFloat
-    }
-}
-
-private extension PokemonListRowView {
-    var metrics: Metrics {
-        return Metrics(textPadding: 8,
-                       thumbnailSize: 76,
-                       rowPadding: 0,
-                       cornerRadius: 16
-        )
     }
 }
 

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PokemonListView: View {
     
-    @StateObject var pokemonListVM = PokemonListViewModel()
+    @StateObject private var pokemonListVM = PokemonListViewModel()
     
     @ViewBuilder
     var progressView: some View {
@@ -26,7 +26,12 @@ struct PokemonListView: View {
                 }
             }
         }
-        .searchable(text: $pokemonListVM.searchText)
+        .searchable(text: $pokemonListVM.searchText) {
+            ForEach(pokemonListVM.suggestions, id: \.self) { suggestion in
+                Text(suggestion)
+                    .searchCompletion(suggestion)
+            }
+        }
         .overlay(progressView)
         .navigationTitle(pokemonListVM.navigationTitle)
         .toolbar  {
