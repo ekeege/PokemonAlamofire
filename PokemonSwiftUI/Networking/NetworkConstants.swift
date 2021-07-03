@@ -10,5 +10,4 @@ import Foundation
 struct NetworkConstants {
     
     public static var baseURL: String = "https://pokeapi.co/api/v2"
-    
 }

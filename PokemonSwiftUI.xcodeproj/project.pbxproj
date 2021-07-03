@@ -134,18 +134,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		D421EB1325B050FD0028C0CC /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				D46C141D25B2EF1C0017055D /* Navigation */,
-				D4BB900C25B2E8A800E11EBC /* Constants */,
-				D4EF01F125B09E7D00143A5C /* Views */,
-				D421EB2C25B058490028C0CC /* Models */,
-				D421EB1425B051090028C0CC /* Networking */,
-			);
-			path = Shared;
-			sourceTree = "<group>";
-		};
 		D421EB1425B051090028C0CC /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,7 +178,11 @@
 			isa = PBXGroup;
 			children = (
 				D462BD6A25AF63C700F43E8E /* PokemonSwiftUIApp.swift */,
-				D421EB1325B050FD0028C0CC /* Shared */,
+				D46C141D25B2EF1C0017055D /* Navigation */,
+				D4BB900C25B2E8A800E11EBC /* Constants */,
+				D4EF01F125B09E7D00143A5C /* Views */,
+				D421EB2C25B058490028C0CC /* Models */,
+				D421EB1425B051090028C0CC /* Networking */,
 				D462BD6E25AF63C800F43E8E /* Assets.xcassets */,
 				D462BD7325AF63C800F43E8E /* Info.plist */,
 				D462BD7025AF63C800F43E8E /* Preview Content */,

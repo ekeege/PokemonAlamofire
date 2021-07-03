@@ -47,6 +47,7 @@ struct DreamWorld: Codable {
 }
 
 //MARK: - Mock
+
 extension PokemonDetail {
     static let testData = PokemonDetail(id: 0,
                                         name: "Unknown",
